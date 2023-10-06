@@ -1,0 +1,24 @@
+﻿@model DbApproach.Models.Brand
+@{
+    ViewBag.Title = "Edit brand";
+}
+
+<h2 class="txt-center mb-5">Edit Brands</h2>
+
+<form method="post" action="/brand/edit">
+    <div class="d-grid grid-1-4 mb-3">
+        <label class="col-form-label">Brand Id/Code</label>
+        <input type="number" class="form-control bg-disabled" name="BrandId"  value="@Model.BrandId" readonly >
+        @*<input type="hidden" class="form-control" id="brandId" name="BrandId" value="@Model.BrandId" >*@
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="brandName" class="col-form-label">Brand Name</label>
+        <input type="text" class="form-control" id="brandName" name="BrandName" value="@Model.BrandName">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/brand">
+        <button type="button" class="btn btn-outline-danger">
+            Cancel
+        </button>
+    </a>
+</form>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Input brand";
+}
+
+<h2 class="txt-center mb-5">Input New Brands</h2>
+
+<form method="post" action="/brand/input">
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="brandId" class="col-form-label">Brand Id/Code</label>
+        <input type="number" class="form-control" id="brandId" name="BrandId">
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="brandName" class="col-form-label">Brand Name</label>
+        <input type="text" class="form-control" id="brandName" name="BrandName">
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="/brand">
+        <button type="button" class="btn btn-outline-danger">
+            Cancel
+        </button>
+    </a>
+</form>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Style/basic.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fontawesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="bg-primary-local navbar px-5">
+        <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+        </div>
+    </nav>
+    <div class="d-grid grid-1-5">
+        <div class="h-95vh bg-secondary-local ps-5 pe-2 pt-2">
+            <nav class="d-flex flex-column nav nav-pills">
+                <a class="navbar-brand nav-link py-2" aria-current="page" href="/home">Home</a>
+                <a class="navbar-brand nav-link py-2" aria-current="page" href="/product">Product</a>
+                <a class="navbar-brand nav-link py-2" aria-current="page" href="/category">Category</a>
+                <a class="navbar-brand nav-link py-2" aria-current="page" href="/brand">Brand</a>
+            </nav>
+        </div>
+        <div class="h-full overflow-y-scroll pt-2 ps-5 pe-5">
+            @RenderBody()
+            <div style="height:5em"></div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var navClass = $(".nav-link");
+            var pathname = window.location.pathname;
+            var pathArr = pathname.split("/");
+            if (pathArr[1] == "" || pathArr[1] == "home") {
+                navClass[0].classList.add("active");
+            } else if (pathArr[1] == "product") {
+                navClass[1].classList.add("active");
+                return false
+            } else if (pathArr[1] == "category") {
+                navClass[2].classList.add("active");
+                return false
+            } else if (pathArr[1] == "brand") {
+                navClass[3].classList.add("active");
+                return false
+            }
+        })
+    </script>
+</body>
+</html>

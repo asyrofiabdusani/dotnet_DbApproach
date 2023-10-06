@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Input product";
+}
+
+<h2 class="txt-center mb-5">Input New Product</h2>
+
+<form method="post" action="/product/input" enctype="multipart/form-data">
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="ProductId" class="col-form-label">Product Id</label>
+        <input type="number" class="form-control" id="ProductId" name="ProductId">
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="ProductName" class="col-form-label">Product Name</label>
+        <input type="text" class="form-control" id="ProductName" name="ProductName">
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="DateOfPurchase" class="col-form-label">Date Of Purchase</label>
+        <input type="date" class="form-control" id="DateOfPurchase" name="DateOfPurchase">
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label class="col-form-label">Availability Status</label>
+        <div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="AvailableStatus" id="AvailableStatus1" value="1" checked>
+                <label class="form-check-label ms-2" for="AvailableStatus1">
+                    Available
+                </label>
+            </div>
+            <div class="form-check gap-2">
+                <input class="form-check-input" type="radio" name="AvailableStatus" id="AvailableStatus2" value="0">
+                <label class="form-check-label ms-2" for="AvailableStatus2">
+                    Not Available
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="CategoryId" class="col-form-label">Category</label>
+        <select class="form-select" aria-label="Default select" id="CategoryId" name="CategoryId">
+            <option selected>Select category</option>
+            @{ foreach (var item in ViewBag.cat)
+                {
+                    <option value="@item.CategoryId">@item.CategoryName</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="BrandId" class="col-form-label">Brand Id</label>
+        <select class="form-select" aria-label="Default select" id="BrandId" name="BrandId">
+            <option selected>Select brand</option>
+            @{ foreach (var item in ViewBag.brand)
+                {
+                    <option value="@item.BrandId">@item.BrandName</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="price" class="col-form-label">Product Price</label>
+        <input type="number" class="form-control" id="price" name="price">
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="Active" class="col-form-label">Status</label>
+        <div>
+            <input class="form-check-input" value="1" type="checkbox" id="Active" name="Active">
+            <label class="form-check-label ms-2" for="Active">
+                Active
+            </label>
+        </div>
+    </div>
+    <div class="d-grid grid-1-4 mb-3">
+        <label for="Image" class="col-form-label">Product Image</label>
+        <input type="file" class="form-control" id="Image" name="Image">
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="/brand">
+        <button type="button" class="btn btn-outline-danger">
+            Cancel
+        </button>
+    </a>
+</form>

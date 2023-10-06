@@ -1,0 +1,45 @@
+﻿@model List<DbApproach.Models.Category>
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2 class="txt-center mb-5">List Categories</h2>
+
+<form class="d-flex w-60 mb-3" method="get" action="/category/index">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<a href="/category/input">
+    <div class="absolute btm-0 right-0 mb-5 me-5 d-flex flex-column align-center pointer">
+        <i class="bi bi-plus-circle" style="font-size: 3rem;"></i>
+        <p class="txt-bold">Add New</p>
+    </div>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int no = 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@no</th>
+                <td>@item.CategoryName</td>
+                <td class="d-flex gap-3">
+                    <a href="/category/edit?id=@item.CategoryId">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                    </a>
+                    <a href="/category/delete?id=@item.CategoryId">
+                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            no++;
+        }
+    </tbody>
+</table>

@@ -1,0 +1,173 @@
+﻿@model List<DbApproach.Models.Product>
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2 class="txt-center mb-5">List Brands</h2>
+
+<form class="d-flex w-60 mb-3" method="get" action="/product/index">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<a href="/product/input">
+    <div class="absolute btm-0 right-0 mb-5 me-5 d-flex flex-column align-center pointer">
+        <i class="bi bi-plus-circle" style="font-size: 3rem;"></i>
+        <p class="txt-bold">Add New</p>
+    </div>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">
+                @{
+                    if (ViewBag.IconClass == "bi-sort-alpha-up")
+                    {
+                        if (ViewBag.SortColumn == "ProductName")
+                        {
+                            <a href="/product/index?SortColumn=ProductName&IconClass=bi-sort-alpha-down">
+                                Product Name
+                                <i class="bi @ViewBag.IconClass"></i>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.SortColumn == "ProductName")
+                        {
+                            <a href="/product/index?SortColumn=ProductName&IconClass=bi-sort-alpha-up">
+                                Product Name
+                                <i class="bi @ViewBag.IconClass"></i>
+                            </a>
+                        }
+                    }
+                }
+            </th>
+            <th scope="col">Brand</th>
+            <th scope="col">Category</th>
+            <th scope="col">Availabilty</th>
+            <th scope="col">Date Purcase</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int no = 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@no</th>
+                <td>@item.ProductName</td>
+                <td>
+                    @{
+                        string brandName = "";
+                        foreach (var brand in ViewBag.brand)
+                        {
+                            if (item.BrandId == brand.BrandId)
+                            {
+                                brandName = brand.BrandName;
+                            }
+                        }
+
+                    }
+                    @brandName
+                </td>
+                <td>
+                    @{
+                        string catName = "";
+                        foreach (var cat in ViewBag.cat)
+                        {
+                            if (item.CategoryId == cat.CategoryId)
+                            {
+                                catName = cat.CategoryName;
+                            }
+                        }
+
+                    }
+                    @catName
+                </td>
+                <td>
+                    @{ string available = "";
+                        if (item.AvailableStatus == 1)
+                        {
+                            available = "Available";
+                        }
+                        else
+                        {
+                            available = "Not Available";
+                        }
+                    }
+                    @available
+                </td>
+                <td>@item.DateOfPurchase</td>
+                <td>@item.Price</td>
+                <td>
+                    @{ string active = "";
+                        if (item.Active == 1)
+                        {
+                            active = "Active";
+                        }
+                        else
+                        {
+                            active = "Not Active";
+                        }
+                    }
+
+                    @active
+                </td>
+                <td>
+                    <a href="/product/edit?id=@item.ProductId">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                    </a>
+                    <a href="/product/delete?id=@item.ProductId">
+                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            no++;
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    @{
+        string url = (Convert.ToString(ViewBag.url));
+        string prefixUrl = "";
+
+        if (url.Contains("?"))
+        {
+            if (url.Contains("page"))
+            {
+                prefixUrl = "";
+                string[] urlArr = url.Split('&');
+                if (urlArr.Count() == 1)
+                {
+                    string[] baseUrll = urlArr[0].Split('?');
+                    prefixUrl = baseUrll[0] + "?";
+                }
+                else
+                {
+                    for (int i = 0; i < urlArr.Count() - 1; i++)
+                    {
+                        prefixUrl = prefixUrl + urlArr[i] +"&";
+                    }
+                }
+            }
+            else
+            {
+                prefixUrl = url + "&";
+            }
+        }
+        else
+        {
+            prefixUrl = url + "?";
+        }
+    }
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="@(prefixUrl)page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="@(prefixUrl)page=2">2</a></li>
+        <li class="page-item"><a class="page-link" href="@(prefixUrl)page=3">3</a></li>
+    </ul>
+</nav>
+
